@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 07-09-2024 a las 21:56:20
+-- Tiempo de generación: 16-09-2024 a las 02:23:31
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -221,18 +221,19 @@ CREATE TABLE `comunidad` (
   `descripcion` varchar(200) DEFAULT NULL,
   `ubicacion` varchar(255) DEFAULT NULL,
   `categoria` varchar(100) DEFAULT NULL,
-  `idAdministrador` int(11) DEFAULT NULL
+  `idAdministrador` int(11) DEFAULT NULL,
+  `imagen` varchar(255) NOT NULL DEFAULT 'comunidad.jpg'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `comunidad`
 --
 
-INSERT INTO `comunidad` (`idComunidad`, `nombre`, `descripcion`, `ubicacion`, `categoria`, `idAdministrador`) VALUES
-(1, 'Comunidad A', 'Descripción de la Comunidad A', 'Ubicación A', 'Categoría A', 12),
-(2, 'Comunidad B', 'Descripción de la Comunidad B', 'Ubicación B', 'Categoría B', 13),
-(3, 'Comunidad C', 'Descripción de la Comunidad C', 'Ubicación C', 'Categoría C', 14),
-(4, 'Comunidad D', 'Descripción de la Comunidad D', 'Ubicación D', 'Categoría D', 15);
+INSERT INTO `comunidad` (`idComunidad`, `nombre`, `descripcion`, `ubicacion`, `categoria`, `idAdministrador`, `imagen`) VALUES
+(1, 'Comunidad A', 'Descripción de la Comunidad A', 'Ubicación A', 'Categoría A', 12, 'comunidad.jpg'),
+(2, 'Comunidad B', 'Descripción de la Comunidad B', 'Ubicación B', 'Categoría B', 13, 'comunidad.jpg'),
+(3, 'Comunidad C', 'Descripción de la Comunidad C', 'Ubicación C', 'Categoría C', 14, 'comunidad.jpg'),
+(4, 'Comunidad D', 'Descripción de la Comunidad D', 'Ubicación D', 'Categoría D', 15, 'comunidad.jpg');
 
 -- --------------------------------------------------------
 
@@ -572,24 +573,25 @@ CREATE TABLE `personalentrega` (
   `tipo_vehiculo` varchar(255) DEFAULT NULL,
   `placa_vehiculo` varchar(255) DEFAULT NULL,
   `hora_ingreso` time DEFAULT NULL,
-  `hora_salida` time DEFAULT NULL
+  `hora_salida` time DEFAULT NULL,
+  `disponibilidad` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `personalentrega`
 --
 
-INSERT INTO `personalentrega` (`idPersonalEntrega`, `tipo_vehiculo`, `placa_vehiculo`, `hora_ingreso`, `hora_salida`) VALUES
-(6, 'Moto', 'JKL3456', '11:00:00', '20:00:00'),
-(7, 'Camioneta', 'UVW1234', '09:30:00', '18:30:00'),
-(8, 'Bicicleta', 'GHI7890', '10:30:00', '19:30:00'),
-(9, 'Moto', 'RST9012', '07:00:00', '16:00:00'),
-(10, 'Camioneta', 'PQR3456', '08:00:00', '17:00:00'),
-(16, 'Moto', 'ABC1234', '08:00:00', '17:00:00'),
-(17, 'Camioneta', 'XYZ5678', '09:00:00', '18:00:00'),
-(18, 'Bicicleta', 'LMN9101', '10:00:00', '19:00:00'),
-(19, 'Moto', 'OPQ2345', '07:30:00', '16:30:00'),
-(20, 'Camioneta', 'RST6789', '08:30:00', '17:30:00');
+INSERT INTO `personalentrega` (`idPersonalEntrega`, `tipo_vehiculo`, `placa_vehiculo`, `hora_ingreso`, `hora_salida`, `disponibilidad`) VALUES
+(6, 'Moto', 'JKL3456', '11:00:00', '20:00:00', 0),
+(7, 'Camioneta', 'UVW1234', '09:30:00', '18:30:00', 0),
+(8, 'Bicicleta', 'GHI7890', '10:30:00', '19:30:00', 0),
+(9, 'Moto', 'RST9012', '07:00:00', '16:00:00', 0),
+(10, 'Camioneta', 'PQR3456', '08:00:00', '17:00:00', 0),
+(16, 'Moto', 'ABC1234', '08:00:00', '17:00:00', 0),
+(17, 'Camioneta', 'XYZ5678', '09:00:00', '18:00:00', 0),
+(18, 'Bicicleta', 'LMN9101', '10:00:00', '19:00:00', 0),
+(19, 'Moto', 'OPQ2345', '07:30:00', '16:30:00', 0),
+(20, 'Camioneta', 'RST6789', '08:30:00', '17:30:00', 0);
 
 -- --------------------------------------------------------
 
@@ -603,34 +605,35 @@ CREATE TABLE `producto` (
   `idCategoria` int(11) DEFAULT NULL,
   `descripcion` text DEFAULT NULL,
   `precio` decimal(10,2) NOT NULL,
-  `idArtesano` int(11) NOT NULL
+  `idArtesano` int(11) NOT NULL,
+  `imagen` varchar(255) NOT NULL DEFAULT 'producto.jpg'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `producto`
 --
 
-INSERT INTO `producto` (`idProducto`, `nombre`, `idCategoria`, `descripcion`, `precio`, `idArtesano`) VALUES
-(800, 'Vaso de cerámica', 1100, 'Vaso hecho a mano con diseños tradicionales.', 10.50, 21),
-(801, 'Bolsa tejida', 1101, 'Bolsa hecha a mano con materiales naturales.', 25.00, 21),
-(802, 'Collar de plata', 1102, 'Collar artesanal de plata.', 150.00, 21),
-(803, 'Cuadro al óleo', 1103, 'Pintura al óleo en lienzo.', 200.00, 21),
-(804, 'Figura de madera', 1104, 'Escultura tallada en madera.', 50.00, 22),
-(805, 'Vaso de vidrio', 1105, 'Vaso de vidrio soplado a mano.', 30.00, 22),
-(806, 'Billetera de cuero', 1106, 'Billetera hecha a mano de cuero.', 45.00, 22),
-(807, 'Cesta de mimbre', 1107, 'Cesta tejida a mano.', 20.00, 23),
-(808, 'Cuaderno reciclado', 1108, 'Cuaderno hecho de papel reciclado.', 12.00, 23),
-(809, 'Escultura de metal', 1109, 'Obra escultórica en metal.', 300.00, 23),
-(810, 'Camiseta bordada', 1110, 'Camiseta con bordados artesanales.', 35.00, 23),
-(811, 'Muñeca de trapo', 1111, 'Muñeca hecha a mano de trapo.', 15.00, 23),
-(812, 'Cincel artesanal', 1112, 'Cincel hecho a mano para tallado.', 25.00, 24),
-(813, 'Mesa de madera', 1113, 'Mesa de madera artesanal.', 250.00, 24),
-(814, 'Lámpara decorativa', 1114, 'Lámpara artesanal decorativa.', 60.00, 24),
-(815, 'Sombrero de paja', 1115, 'Sombrero hecho a mano de paja.', 20.00, 24),
-(816, 'Fotografía enmarcada', 1116, 'Fotografía artística enmarcada.', 100.00, 25),
-(817, 'Guitarra artesanal', 1117, 'Guitarra hecha a mano.', 500.00, 25),
-(818, 'Sandalias de cuero', 1118, 'Sandalias hechas a mano de cuero.', 40.00, 25),
-(819, 'Jarrón cerámico', 1119, 'Jarrón de cerámica avanzada.', 75.00, 25);
+INSERT INTO `producto` (`idProducto`, `nombre`, `idCategoria`, `descripcion`, `precio`, `idArtesano`, `imagen`) VALUES
+(800, 'Vaso de cerámica', 1100, 'Vaso hecho a mano con diseños tradicionales.', 10.50, 21, 'producto.jpg'),
+(801, 'Bolsa tejida', 1101, 'Bolsa hecha a mano con materiales naturales.', 25.00, 21, 'producto.jpg'),
+(802, 'Collar de plata', 1102, 'Collar artesanal de plata.', 150.00, 21, 'producto.jpg'),
+(803, 'Cuadro al óleo', 1103, 'Pintura al óleo en lienzo.', 200.00, 21, 'producto.jpg'),
+(804, 'Figura de madera', 1104, 'Escultura tallada en madera.', 50.00, 22, 'producto.jpg'),
+(805, 'Vaso de vidrio', 1105, 'Vaso de vidrio soplado a mano.', 30.00, 22, 'producto.jpg'),
+(806, 'Billetera de cuero', 1106, 'Billetera hecha a mano de cuero.', 45.00, 22, 'producto.jpg'),
+(807, 'Cesta de mimbre', 1107, 'Cesta tejida a mano.', 20.00, 23, 'producto.jpg'),
+(808, 'Cuaderno reciclado', 1108, 'Cuaderno hecho de papel reciclado.', 12.00, 23, 'producto.jpg'),
+(809, 'Escultura de metal', 1109, 'Obra escultórica en metal.', 300.00, 23, 'producto.jpg'),
+(810, 'Camiseta bordada', 1110, 'Camiseta con bordados artesanales.', 35.00, 23, 'producto.jpg'),
+(811, 'Muñeca de trapo', 1111, 'Muñeca hecha a mano de trapo.', 15.00, 23, 'producto.jpg'),
+(812, 'Cincel artesanal', 1112, 'Cincel hecho a mano para tallado.', 25.00, 24, 'producto.jpg'),
+(813, 'Mesa de madera', 1113, 'Mesa de madera artesanal.', 250.00, 24, 'producto.jpg'),
+(814, 'Lámpara decorativa', 1114, 'Lámpara artesanal decorativa.', 60.00, 24, 'producto.jpg'),
+(815, 'Sombrero de paja', 1115, 'Sombrero hecho a mano de paja.', 20.00, 24, 'producto.jpg'),
+(816, 'Fotografía enmarcada', 1116, 'Fotografía artística enmarcada.', 100.00, 25, 'producto.jpg'),
+(817, 'Guitarra artesanal', 1117, 'Guitarra hecha a mano.', 500.00, 25, 'producto.jpg'),
+(818, 'Sandalias de cuero', 1118, 'Sandalias hechas a mano de cuero.', 40.00, 25, 'producto.jpg'),
+(819, 'Jarrón cerámico', 1119, 'Jarrón de cerámica avanzada.', 75.00, 25, 'producto.jpg');
 
 -- --------------------------------------------------------
 
@@ -724,45 +727,45 @@ CREATE TABLE `usuario` (
   `idUsuario` int(11) NOT NULL,
   `nombre` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
-  `pasword` varchar(100) NOT NULL,
+  `password` varchar(100) DEFAULT NULL,
   `apellido` varchar(100) NOT NULL,
   `fechaNac` date NOT NULL,
   `direccion` varchar(255) DEFAULT NULL,
   `telefono` varchar(15) DEFAULT NULL,
-  `edad` int(3) DEFAULT NULL,
-  `fechacreacionCuenta` date DEFAULT NULL
+  `fechacreacionCuenta` date DEFAULT NULL,
+  `imagen` varchar(255) NOT NULL DEFAULT 'user.jpg'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `usuario`
 --
 
-INSERT INTO `usuario` (`idUsuario`, `nombre`, `email`, `pasword`, `apellido`, `fechaNac`, `direccion`, `telefono`, `edad`, `fechacreacionCuenta`) VALUES
-(1, 'Juan', 'juan.perez@example.com', 'password1', 'Pérez', '1985-01-15', 'Calle Falsa 123', '555-1234', 39, '2024-09-01'),
-(2, 'Ana', 'ana.gomez@example.com', 'password2', 'Gómez', '1990-03-22', 'Avenida Siempre Viva 456', '555-5678', 34, '2024-09-01'),
-(3, 'Luis', 'luis.martinez@example.com', 'password3', 'Martínez', '1978-06-30', 'Calle del Sol 789', '555-8765', 46, '2024-09-01'),
-(4, 'Marta', 'marta.rodriguez@example.com', 'password4', 'Rodríguez', '1983-11-12', 'Paseo de la Reforma 101', '555-3456', 41, '2024-09-01'),
-(5, 'Carlos', 'carlos.garcia@example.com', 'password5', 'García', '1992-02-08', 'Calle del Viento 202', '555-6543', 32, '2024-09-01'),
-(6, 'Laura', 'laura.fernandez@example.com', 'password6', 'Fernández', '1988-05-20', 'Calle del Mar 303', '555-9876', 36, '2024-09-01'),
-(7, 'Pedro', 'pedro.lopez@example.com', 'password7', 'López', '1975-09-15', 'Calle del Río 404', '555-5432', 49, '2024-09-01'),
-(8, 'Clara', 'clara.alvarez@example.com', 'password8', 'Álvarez', '1995-07-30', 'Calle del Bosque 505', '555-6789', 29, '2024-09-01'),
-(9, 'Jorge', 'jorge.jimenez@example.com', 'password9', 'Jiménez', '1980-12-10', 'Calle de la Luna 606', '555-2345', 43, '2024-09-01'),
-(10, 'Sofía', 'sofia.castro@example.com', 'password10', 'Castro', '1987-04-05', 'Calle de la Nube 707', '555-3456', 37, '2024-09-01'),
-(11, 'Elena', 'elena.molina@example.com', 'password11', 'Molina', '1979-08-17', 'Calle del Horizonte 808', '555-4567', 45, '2024-09-01'),
-(12, 'Ricardo', 'ricardo.pinto@example.com', 'password12', 'Pinto', '1982-02-15', 'Calle de la Esperanza 909', '555-7890', 42, '2024-09-01'),
-(13, 'Paola', 'paola.cruz@example.com', 'password13', 'Cruz', '1989-03-21', 'Calle de los Sueños 1001', '555-3456', 35, '2024-09-01'),
-(14, 'Fernando', 'fernando.suarez@example.com', 'password14', 'Suárez', '1991-11-30', 'Calle del Éxito 1111', '555-6543', 33, '2024-09-01'),
-(15, 'Gabriela', 'gabriela.mendez@example.com', 'password15', 'Méndez', '1980-12-20', 'Calle del Triunfo 1222', '555-7891', 43, '2024-09-01'),
-(16, 'Fernando', 'fernando.perez@example.com', 'password16', 'Pérez', '1981-05-15', 'Calle de la Esperanza 202', '555-5678', 43, '2024-09-01'),
-(17, 'Julieta', 'julieta.morales@example.com', 'password17', 'Morales', '1990-11-30', 'Calle del Bosque 303', '555-6789', 33, '2024-09-01'),
-(18, 'Alejandro', 'alejandro.jimenez@example.com', 'password18', 'Jiménez', '1985-07-21', 'Calle del Sol 404', '555-7890', 39, '2024-09-01'),
-(19, 'Sofía', 'sofia.vasquez@example.com', 'password19', 'Vásquez', '1993-02-12', 'Calle del Mar 505', '555-8901', 31, '2024-09-01'),
-(20, 'Jorge', 'jorge.castro@example.com', 'password20', 'Castro', '1987-09-19', 'Calle del Viento 606', '555-9012', 36, '2024-09-01'),
-(21, 'Mónica', 'monica.ruiz@example.com', 'password21', 'Ruiz', '1992-04-05', 'Calle del Norte 707', '555-0123', 32, '2024-09-01'),
-(22, 'Ricardo', 'ricardo.gomez@example.com', 'password22', 'Gómez', '1980-12-28', 'Calle del Río 808', '555-1234', 43, '2024-09-01'),
-(23, 'Natalia', 'natalia.ortiz@example.com', 'password23', 'Ortiz', '1988-06-30', 'Calle de los Pinos 909', '555-2345', 36, '2024-09-01'),
-(24, 'Gabriel', 'gabriel.lopez@example.com', 'password24', 'López', '1995-01-18', 'Calle de la Luna 1010', '555-3456', 29, '2024-09-01'),
-(25, 'Carla', 'carla.sanchez@example.com', 'password25', 'Sánchez', '1983-08-10', 'Calle del Estilo 1111', '555-4567', 41, '2024-09-01');
+INSERT INTO `usuario` (`idUsuario`, `nombre`, `email`, `password`, `apellido`, `fechaNac`, `direccion`, `telefono`, `fechacreacionCuenta`, `imagen`) VALUES
+(1, 'Juan', 'juan.perez@example.com', 'password1', 'Pérez', '1985-01-15', 'Calle Falsa 123', '555-1234', '2024-09-01', 'user.jpg'),
+(2, 'Ana', 'ana.gomez@example.com', 'password2', 'Gómez', '1990-03-22', 'Avenida Siempre Viva 456', '555-5678', '2024-09-01', 'user.jpg'),
+(3, 'Luis', 'luis.martinez@example.com', 'password3', 'Martínez', '1978-06-30', 'Calle del Sol 789', '555-8765', '2024-09-01', 'user.jpg'),
+(4, 'Marta', 'marta.rodriguez@example.com', 'password4', 'Rodríguez', '1983-11-12', 'Paseo de la Reforma 101', '555-3456', '2024-09-01', 'user.jpg'),
+(5, 'Carlos', 'carlos.garcia@example.com', 'password5', 'García', '1992-02-08', 'Calle del Viento 202', '555-6543', '2024-09-01', 'user.jpg'),
+(6, 'Laura', 'laura.fernandez@example.com', 'password6', 'Fernández', '1988-05-20', 'Calle del Mar 303', '555-9876', '2024-09-01', 'user.jpg'),
+(7, 'Pedro', 'pedro.lopez@example.com', 'password7', 'López', '1975-09-15', 'Calle del Río 404', '555-5432', '2024-09-01', 'user.jpg'),
+(8, 'Clara', 'clara.alvarez@example.com', 'password8', 'Álvarez', '1995-07-30', 'Calle del Bosque 505', '555-6789', '2024-09-01', 'user.jpg'),
+(9, 'Jorge', 'jorge.jimenez@example.com', 'password9', 'Jiménez', '1980-12-10', 'Calle de la Luna 606', '555-2345', '2024-09-01', 'user.jpg'),
+(10, 'Sofía', 'sofia.castro@example.com', 'password10', 'Castro', '1987-04-05', 'Calle de la Nube 707', '555-3456', '2024-09-01', 'user.jpg'),
+(11, 'Elena', 'elena.molina@example.com', 'password11', 'Molina', '1979-08-17', 'Calle del Horizonte 808', '555-4567', '2024-09-01', 'user.jpg'),
+(12, 'Ricardo', 'ricardo.pinto@example.com', 'password12', 'Pinto', '1982-02-15', 'Calle de la Esperanza 909', '555-7890', '2024-09-01', 'user.jpg'),
+(13, 'Paola', 'paola.cruz@example.com', 'password13', 'Cruz', '1989-03-21', 'Calle de los Sueños 1001', '555-3456', '2024-09-01', 'user.jpg'),
+(14, 'Fernando', 'fernando.suarez@example.com', 'password14', 'Suárez', '1991-11-30', 'Calle del Éxito 1111', '555-6543', '2024-09-01', 'user.jpg'),
+(15, 'Gabriela', 'gabriela.mendez@example.com', 'password15', 'Méndez', '1980-12-20', 'Calle del Triunfo 1222', '555-7891', '2024-09-01', 'user.jpg'),
+(16, 'Fernando', 'fernando.perez@example.com', 'password16', 'Pérez', '1981-05-15', 'Calle de la Esperanza 202', '555-5678', '2024-09-01', 'user.jpg'),
+(17, 'Julieta', 'julieta.morales@example.com', 'password17', 'Morales', '1990-11-30', 'Calle del Bosque 303', '555-6789', '2024-09-01', 'user.jpg'),
+(18, 'Alejandro', 'alejandro.jimenez@example.com', 'password18', 'Jiménez', '1985-07-21', 'Calle del Sol 404', '555-7890', '2024-09-01', 'user.jpg'),
+(19, 'Sofía', 'sofia.vasquez@example.com', 'password19', 'Vásquez', '1993-02-12', 'Calle del Mar 505', '555-8901', '2024-09-01', 'user.jpg'),
+(20, 'Jorge', 'jorge.castro@example.com', 'password20', 'Castro', '1987-09-19', 'Calle del Viento 606', '555-9012', '2024-09-01', 'user.jpg'),
+(21, 'Mónica', 'monica.ruiz@example.com', 'password21', 'Ruiz', '1992-04-05', 'Calle del Norte 707', '555-0123', '2024-09-01', 'user.jpg'),
+(22, 'Ricardo', 'ricardo.gomez@example.com', 'password22', 'Gómez', '1980-12-28', 'Calle del Río 808', '555-1234', '2024-09-01', 'user.jpg'),
+(23, 'Natalia', 'natalia.ortiz@example.com', 'password23', 'Ortiz', '1988-06-30', 'Calle de los Pinos 909', '555-2345', '2024-09-01', 'user.jpg'),
+(24, 'Gabriel', 'gabriel.lopez@example.com', 'password24', 'López', '1995-01-18', 'Calle de la Luna 1010', '555-3456', '2024-09-01', 'user.jpg'),
+(25, 'Carla', 'carla.sanchez@example.com', 'password25', 'Sánchez', '1983-08-10', 'Calle del Estilo 1111', '555-4567', '2024-09-01', 'user.jpg');
 
 --
 -- Índices para tablas volcadas
