@@ -17,7 +17,6 @@
             <div class="mb-3">
                 <input class="form-control" type="file" id="formFile">
             </div>
-
             <form class="row g-3" style="padding-bottom: 20px ;">
                 <div class="col-md-6">
                     <label for="inputEmail4" class="form-label">ID usuario</label>
@@ -46,11 +45,9 @@
             
         </div>
         <div class="container ">
-            <!-- Contenido de la derecha -->
 
             <form class="row g-3">
 
-                
                 <div class="col-md-6">
                     <label for="fecha-nacimiento">Fecha de Nacimiento:</label>
                     <input type="date" id="fecha-nacimiento" name="fecha-nacimiento" >

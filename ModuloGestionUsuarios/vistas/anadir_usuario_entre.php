@@ -8,17 +8,13 @@
 
     <div class="container">
         <p class="fw-normal fs-2" style="margin: 3px; font-family: 'Arial Narrow', Arial, sans-serif; text-align:center">Agregar personal de entrega</p>
-  
-
     </div>
     <div class="contenedor">
         <div class="container ">
-            <!-- Contenido de la izquierda -->
             <div style="text-align: center; margin: 10px"><img src='../img/logo.jpg' class="img-thumbnail" alt="..." width="250" height="250" ></div>
             <div class="mb-3">
                 <input class="form-control" type="file" id="formFile">
             </div>
-
             <form class="row g-3" style="padding-bottom:20px ;">
                 <div class="col-md-6">
                     <label for="inputEmail4" class="form-label">ID usuario</label>
@@ -48,10 +44,7 @@
                 </div>
                 
                 
-            </form>
-
-
-            
+            </form> 
         </div>
         <div class="container ">
             <!-- Contenido de la derecha -->

@@ -1,3 +1,22 @@
+<?php
+include('../php/conexion.php');
+$conexion = conexion();
+
+$sql = "SELECT 
+    u.nombre, u.apellido, u.email, u.direccion, u.telefono, pe.tipo_vehiculo, pe.hora_ingreso, pe.hora_salida
+FROM 
+    usuario u, 
+    personalentrega pe
+WHERE 
+    u.idUsuario = pe.idPersonalEntrega;";
+
+$resultado = $conexion->query($sql); // pediticion a la base de datos
+$datos = mysqli_fetch_all($resultado, MYSQLI_NUM); //convirtiendo a array
+
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,7 +38,7 @@
     </div>
     
     
-    <div class="container-xxl">
+    <div class="container-xxl table-responsive">
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -37,92 +56,26 @@
                 </tr>
             </thead>
             <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>Santos</td>
-                <td>Perez</td>
-                <td>santos@gmail.com</td>
-                <td>Calle false nro345</td>
-                <td>653563456</td>
-                <td>Moto</td>
-                <td>08:00</td>
-                <td>13:30</td>
-                <td>
-                    <button type="button" class="btn btn-sm" style="background-color:yellow;">Editar</button>
-                    <button type="button" class="btn btn-sm" style="background-color:tomato;">Eliminar</button>
-                </td>
-            </tr>
-
-            <tr>
-                <th scope="row">2</th>
-                <td>Ana</td>
-                <td>Martinez</td>
-                <td>ana.martinez@gmail.com</td>
-                <td>Calle Los Pinos 123</td>
-                <td>654789123</td>
-                <td>Coche</td>
-                <td>09:00</td>
-                <td>14:00</td>
-                <td>
-                    <button type="button" class="btn btn-sm" style="background-color:yellow;">Editar</button>
-                    <button type="button" class="btn btn-sm" style="background-color:tomato;">Eliminar</button>
-                </td>
-            </tr>
-
-            <tr>
-                <th scope="row">3</th>
-                <td>Carlos</td>
-                <td>Gomez</td>
-                <td>carlos.gomez@yahoo.com</td>
-                <td>Avenida Central 456</td>
-                <td>657987321</td>
-                <td>Bicicleta</td>
-                <td>07:30</td>
-                <td>12:30</td>
-                <td>
-                    <button type="button" class="btn btn-sm" style="background-color:yellow;">Editar</button>
-                    <button type="button" class="btn btn-sm" style="background-color:tomato;">Eliminar</button>
-                </td>
-            </tr>
-
-            <tr>
-                <th scope="row">4</th>
-                <td>Laura</td>
-                <td>Fernandez</td>
-                <td>laura.fernandez@hotmail.com</td>
-                <td>Calle Las Flores 789</td>
-                <td>659123456</td>
-                <td>Patinete</td>
-                <td>10:00</td>
-                <td>15:30</td>
-                <td>
-                    <button type="button" class="btn btn-sm" style="background-color:yellow;">Editar</button>
-                    <button type="button" class="btn btn-sm" style="background-color:tomato;">Eliminar</button>
-                </td>
-            </tr>
-
-<tr>
-    <th scope="row">5</th>
-    <td>Pedro</td>
-    <td>Sanchez</td>
-    <td>pedro.sanchez@gmail.com</td>
-    <td>Camino Verde 321</td>
-    <td>651234567</td>
-    <td>Coche</td>
-    <td>11:00</td>
-    <td>16:00</td>
-    <td>
-        <button type="button" class="btn btn-sm" style="background-color:yellow;">Editar</button>
-        <button type="button" class="btn btn-sm" style="background-color:tomato;">Eliminar</button>
-    </td>
-</tr>
-
-
-                
-
-
-
-
+            <?php
+                $i= 1;
+                foreach ($datos as $fila) { ?>
+                    <tr>
+                        <td><?php echo $i ?></td>
+                        <td><?php echo $fila[0] ?></td>
+                        <td><?php echo $fila[1] ?></td>
+                        <td><?php echo $fila[2] ?></td>
+                        <td><?php echo $fila[3] ?></td>
+                        <td><?php echo $fila[4] ?></td>
+                        <td><?php echo $fila[5] ?></td>
+                        <td><?php echo $fila[6] ?></td>
+                        <td><?php echo $fila[7] ?></td>
+                        
+                        <td>
+                            <a href="actualizar.php?id=<?php echo $fila[0] ?>" class="btn btn-warning">Editar</a>
+                            <a href="borrar.php?id=<?php echo $fila[0] ?>" class="btn btn-danger">Eliminar</a>
+                        </td>
+                    </tr>
+                <?php  $i++;} ?>
 
             </tbody>
         </table>
